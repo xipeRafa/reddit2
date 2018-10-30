@@ -1,4 +1,4 @@
-class CreateLinks < ActiveRecord::Migration[5.2]
+class CreateLinks < ActiveRecord::Migration
   def change
     create_table :links do |t|
       t.string :title
