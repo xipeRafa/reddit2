@@ -1,5 +1,5 @@
 {
   "name": "reddit2",
-  "private": true,
+  "private": false,
   "dependencies": {}
 }
