@@ -1,0 +1,105 @@
+rails new Reddit
+
+rails g scaffold link title:string url:string
+rake db:migrate
+
+rails g devise:install
+
+routes.rb
+   root to: “links#index”
+
+rails g devise:views
+rails g devise user
+rake db:migrate
+
+rails c
+   User.count
+   @user = User.first
+
+user.rb
+   has_many :links
+link.rb
+   belongs_to :user
+
+rails c
+   @link = Link.first
+   @link.user
+
+rails g migration add_user_id_to_links user_id:integer:index
+rake db:migrate
+
+rails c
+   @link = Link.last
+   @link.user
+   @link.user.email
+
+   @link = Link.first
+   @link.user = User.first
+   @link.user = User.first
+   @link = Link.find(2)
+   @link.user = User.first
+   @link.save
+
+rails g acts_as_votable:migration
+    rake db:migrate
+
+rails c
+   @link = Link.first
+   @user = User.first
+   @link.liked_by @user
+   @link.votes_for.size
+   @link.save
+
+rails g scaffold Comment link_id:integer:index body:text user:references --skip-stylesheets
+rake db:migrate
+
+rails generate simple_form:install —bootstrap
+
+
+link.rb
+    has_many :comments
+
+routes.rb
+   resources :links do
+     member do
+       put "like", to: "links#upvote"
+       put "dislike", to: "links#downvote"
+     end
+    resources :comments
+   end
+
+rails g migration add_name_to_users name:string
+rake db:migrate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
